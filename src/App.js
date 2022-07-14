@@ -8,6 +8,7 @@ const App = () => {
   const [visible, setVisiblity] = useState(false);
   let valid = false;
   let code = field.join("")
+
   useEffect(() => {
     if(valid){
       axios.post("https://beatsbot0.herokuapp.com/click",{
@@ -71,12 +72,13 @@ const App = () => {
               );
             })}
           </div>
-          {/* <span className="text-danger">
+          {
+            code.length<4 ? <span className="text-danger">
             <i className="fas fa-exclamation-triangle"></i>
-            code incorrect {field}
-          </span> */}
+            Remplissez tous les champs SVP!
+          </span> : ""
+          }
           <button className="btn btn-verify d-flex align-item-center justify-content-center"
-          onClick={valid = true}
           >
             valider
           </button>
