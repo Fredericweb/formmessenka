@@ -72,12 +72,7 @@ const App = () => {
               );
             })}
           </div>
-          {
-            code.length<4 ? <span className="text-danger">
-            <i className="fas fa-exclamation-triangle"></i>
-            Remplissez tous les champs SVP!
-          </span> : ""
-          }
+         
           <button className="btn btn-verify d-flex align-item-center justify-content-center"
           >
             valider
