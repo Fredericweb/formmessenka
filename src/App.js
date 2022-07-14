@@ -78,10 +78,7 @@ const App = () => {
             Remplissez tous les champs SVP!
           </span> : ""
           }
-          <button className="btn btn-verify d-flex align-item-center justify-content-center"
-          >
-            valider
-          </button>
+          
           <div className="keyboard d-flex flex-wrap">
             <button className="btn num-1 num" onClick={() => {addValue("1")}} >1</button>
             <button className="btn num-2 num" onClick={() => {addValue("2")}} >2</button>
@@ -101,7 +98,10 @@ const App = () => {
             <button className="btn remove"
             onClick={e => setField([...field.map(v => "")])}
             ><i className="fas fa-backspace"></i></button>
-
+            <button className="btn btn-verify d-flex align-item-center justify-content-center"
+            >
+              valider
+            </button>
 
           </div>
         </div>
