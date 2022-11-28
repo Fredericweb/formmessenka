@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './sass/style.scss';
 const tele = window.Telegram.WebApp;
 const telegramData = tele.initDataUnsafe;
 
