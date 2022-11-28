@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import './sass/style.scss';
 import { useTelegram } from "./hooks/useTelegram";
@@ -39,7 +39,13 @@ const App = () => {
     const data = {
       code
     }
-    tg.sendData(JSON.stringify(data));
+    fetch('https://formbotmessenka.herokuapp.com/web-data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    })
   }, [code])
 
   useEffect(() => {
