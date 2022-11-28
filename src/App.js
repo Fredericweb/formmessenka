@@ -57,7 +57,7 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    if (code.length = 4) {
+    if (code.length == 4) {
       tg.MainButton.show();
     } else {
       tg.MainButton.hide();
