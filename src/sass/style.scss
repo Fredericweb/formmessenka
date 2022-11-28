@@ -63,7 +63,7 @@ body{
     }
     .text{
         p{
-            color: rgba(61, 61, 61, 0.8);
+            color: var(--tg-theme-text-color);
         }
     }
     .keyboard{
