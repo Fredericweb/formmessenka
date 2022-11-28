@@ -51,15 +51,16 @@ const App = () => {
 
   useEffect(() => {
     tg.MainButton.setParams({
-      text: 'Valider'
+      text: 'Valider',
+      color: '#ff914c'
     })
   }, [])
 
   useEffect(() => {
-    if (!code) {
-      tg.MainButton.hide();
-    } else {
+    if (code.length = 4) {
       tg.MainButton.show();
+    } else {
+      tg.MainButton.hide();
     }
   }, [code])
 
