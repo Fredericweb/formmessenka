@@ -36,7 +36,8 @@ const App = () => {
 
   const onSendData = useCallback(() => {
     const data = {
-      code
+      code,
+      queryId,
     }
     fetch('https://formbotmessenka.herokuapp.com/web-data', {
       method: 'POST',
