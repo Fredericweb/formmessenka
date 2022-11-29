@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import axios from 'axios';
 import './sass/style.scss';
 import { useTelegram } from "./hooks/useTelegram";
 
 const App = () => {
-  const { tg } = useTelegram();
+  const { tg, queryId } = useTelegram();
 
   useEffect(() => {
     tg.ready();
