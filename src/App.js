@@ -102,12 +102,12 @@ const App = () => {
               );
             })}
           </div>
-          {
+          {/* {
             code.length < 4 ? <span className="text-danger">
               <i className="fas fa-exclamation-triangle"></i>
               Remplissez tous les champs SVP!
             </span> : ""
-          }
+          } */}
 
           <div className="keyboard d-flex flex-wrap">
             <button className="btn num-1 num" onClick={() => { addValue("1") }} >1</button>
