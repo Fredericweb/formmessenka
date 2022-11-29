@@ -29,6 +29,16 @@ const App = () => {
     }
   };
 
+// disposition au hasard des element d'un tableau
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+  return array
+}
+
+  const  btnValue = [1,2,3,4,5,6,7,8,9,0]
+  let btnRandom = shuffle(btnValue)
+
+
   let Icon = visible ? "eye-slash" : "eye";
 
   let InputType = visible ? "text" : "password";
@@ -110,21 +120,21 @@ const App = () => {
           } */}
 
           <div className="keyboard d-flex flex-wrap">
-            <button className="btn num-1 num" onClick={() => { addValue("1") }} >1</button>
-            <button className="btn num-2 num" onClick={() => { addValue("2") }} >2</button>
-            <button className="btn num-3 num" onClick={() => { addValue("3") }}>3</button>
-            <button className="btn num-4 num" onClick={() => { addValue("4") }}>4</button>
-            <button className="btn num-5 num" onClick={() => { addValue("5") }}>5</button>
-            <button className="btn num-6 num" onClick={() => { addValue("6") }}>6</button>
-            <button className="btn num-7 num" onClick={() => { addValue("7") }}>7</button>
-            <button className="btn num-8 num" onClick={() => { addValue("8") }}>8</button>
-            <button className="btn num-9 num" onClick={() => { addValue("9") }}>9</button>
+            <button className="btn num-1 num" onClick={() => { addValue(btnRandom[0]) }} >{btnRandom[0]}</button>
+            <button className="btn num-2 num" onClick={() => { addValue(btnRandom[1]) }} >{btnRandom[1]}</button>
+            <button className="btn num-3 num" onClick={() => { addValue(btnRandom[2]) }}>{btnRandom[2]}</button>
+            <button className="btn num-4 num" onClick={() => { addValue(btnRandom[3]) }}>{btnRandom[3]}</button>
+            <button className="btn num-5 num" onClick={() => { addValue(btnRandom[4]) }}>{btnRandom[4]}</button>
+            <button className="btn num-6 num" onClick={() => { addValue(btnRandom[5]) }}>{btnRandom[5]}</button>
+            <button className="btn num-7 num" onClick={() => { addValue(btnRandom[6]) }}>{btnRandom[6]}</button>
+            <button className="btn num-8 num" onClick={() => { addValue(btnRandom[7]) }}>{btnRandom[7]}</button>
+            <button className="btn num-9 num" onClick={() => { addValue(btnRandom[8]) }}>{btnRandom[8]}</button>
             <button className="btn num-n num"
               onClick={() => setVisiblity(visiblity => !visiblity)}
             >
               <i className={'fas fa-' + Icon} ></i>
             </button>
-            <button className="btn num-0 num" onClick={() => { addValue("0") }}>0</button>
+            <button className="btn num-0 num" onClick={() => { addValue(btnRandom[9]) }}>{btnRandom[9]}</button>
             <button className="btn remove"
               onClick={e => setField([...field.map(v => "")])}
             ><i className="fas fa-backspace"></i></button>
