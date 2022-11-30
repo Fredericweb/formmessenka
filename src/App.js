@@ -4,15 +4,22 @@ import { useTelegram } from "./hooks/useTelegram";
 
 const App = () => {
   const { tg, queryId } = useTelegram();
+  let tab = []
+  function shuffle(array) {
+    array.sort(() => Math.random() - 0.5);
+    return array
+  }
 
   useEffect(() => {
     tg.ready();
   }, [])
 
   const [field, setField] = useState(new Array(4).fill(""));
+  const [randomBtn, setRandomBtn] = useState(shuffle([1,2,3,6,4,5,7,8,9,0]));
   const [visible, setVisiblity] = useState(false);
   let code = field.join("")
 
+// ajouter la valeur du chiffre appuyé dans le tableau field
   const addValue = (val) => {
     if (isNaN(val)) return false
     for (let i = 4; i > -1; i--) {
@@ -22,6 +29,7 @@ const App = () => {
     }
   }
 
+// interdiction de focus des champs
   const handleChange = (element, index) => {
     //Focus input suivant
     if (element.nextSibling) {
@@ -29,21 +37,11 @@ const App = () => {
     }
   };
 
-// disposition au hasard des element d'un tableau
-function shuffle(array) {
-  array.sort(() => Math.random() - 0.5);
-  return array
-}
-
-  const  btnValue = [1,2,3,4,5,6,7,8,9,0]
-  let btnRandom = shuffle(btnValue)
-
-
+// cacher ou rendre visible le code secret
   let Icon = visible ? "eye-slash" : "eye";
-
   let InputType = visible ? "text" : "password";
-
-
+ 
+// envoi de données au backend
   const onSendData = useCallback(() => {
     const data = {
       code,
@@ -58,6 +56,7 @@ function shuffle(array) {
     })
   }, [code])
 
+// en cas de clique sur le bouton validé de Telegram
   useEffect(() => {
     tg.onEvent('mainButtonClicked', onSendData)
     return () => {
@@ -65,6 +64,7 @@ function shuffle(array) {
     }
   }, [onSendData])
 
+// configuration du bouton validé de telegram
   useEffect(() => {
     tg.MainButton.setParams({
       text: 'Valider',
@@ -72,6 +72,7 @@ function shuffle(array) {
     })
   }, [])
 
+  // gestion de l'affichage du bouton
   useEffect(() => {
     if (code.length == 4) {
       tg.MainButton.show();
@@ -79,8 +80,8 @@ function shuffle(array) {
       tg.MainButton.hide();
     }
   }, [code])
-
-
+ 
+  // retour fontend
   return (
     <div>
       <div className="container-content">
@@ -103,7 +104,6 @@ function shuffle(array) {
                   value={data}
                   onChange={e => {
                     handleChange(e.target, index)
-                    console.log(e)
                   }}
                   onFocus={e => e.target.select()}
                   disabled
@@ -120,21 +120,22 @@ function shuffle(array) {
           } */}
 
           <div className="keyboard d-flex flex-wrap">
-            <button className="btn num-1 num" onClick={() => { addValue(btnRandom[0]) }} >{btnRandom[0]}</button>
-            <button className="btn num-2 num" onClick={() => { addValue(btnRandom[1]) }} >{btnRandom[1]}</button>
-            <button className="btn num-3 num" onClick={() => { addValue(btnRandom[2]) }}>{btnRandom[2]}</button>
-            <button className="btn num-4 num" onClick={() => { addValue(btnRandom[3]) }}>{btnRandom[3]}</button>
-            <button className="btn num-5 num" onClick={() => { addValue(btnRandom[4]) }}>{btnRandom[4]}</button>
-            <button className="btn num-6 num" onClick={() => { addValue(btnRandom[5]) }}>{btnRandom[5]}</button>
-            <button className="btn num-7 num" onClick={() => { addValue(btnRandom[6]) }}>{btnRandom[6]}</button>
-            <button className="btn num-8 num" onClick={() => { addValue(btnRandom[7]) }}>{btnRandom[7]}</button>
-            <button className="btn num-9 num" onClick={() => { addValue(btnRandom[8]) }}>{btnRandom[8]}</button>
+
+            <button className="btn num-1 num" onClick={() => { addValue(randomBtn[0]) }} >{randomBtn[0]}</button>
+            <button className="btn num-2 num" onClick={() => { addValue(randomBtn[1]) }} >{randomBtn[1]}</button>
+            <button className="btn num-3 num" onClick={() => { addValue(randomBtn[2]) }}>{randomBtn[2]}</button>
+            <button className="btn num-4 num" onClick={() => { addValue(randomBtn[3]) }}>{randomBtn[3]}</button>
+            <button className="btn num-5 num" onClick={() => { addValue(randomBtn[4]) }}>{randomBtn[4]}</button>
+            <button className="btn num-6 num" onClick={() => { addValue(randomBtn[5]) }}>{randomBtn[5]}</button>
+            <button className="btn num-7 num" onClick={() => { addValue(randomBtn[6]) }}>{randomBtn[6]}</button>
+            <button className="btn num-8 num" onClick={() => { addValue(randomBtn[7]) }}>{randomBtn[7]}</button>
+            <button className="btn num-9 num" onClick={() => { addValue(randomBtn[8]) }}>{randomBtn[8]}</button>
             <button className="btn num-n num"
               onClick={() => setVisiblity(visiblity => !visiblity)}
             >
               <i className={'fas fa-' + Icon} ></i>
             </button>
-            <button className="btn num-0 num" onClick={() => { addValue(btnRandom[9]) }}>{btnRandom[9]}</button>
+            <button className="btn num-0 num" onClick={() => { addValue(randomBtn[9]) }}>{randomBtn[9]}</button>
             <button className="btn remove"
               onClick={e => setField([...field.map(v => "")])}
             ><i className="fas fa-backspace"></i></button>
